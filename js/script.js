@@ -171,3 +171,58 @@
   }); // End of a document
 
 })(jQuery);
+
+
+
+// CHATGPT API FETCH CALL
+
+async function sendMessage(userText) {
+  const res = await fetch('/.netlify/functions/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: userText })
+  });
+
+  if (!res.ok) {
+    throw new Error(`Server responded with ${res.status}`);
+  }
+
+  const data = await res.json();
+  return data.reply;
+}
+
+document.getElementById('sendBtn').addEventListener('click', sendChatMessage);
+
+document.getElementById('chatInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    sendChatMessage();
+  }
+});
+
+async function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  const messagesDiv = document.getElementById('chatMessages');
+  const userText = input.value.trim();
+
+  if (!userText) return;
+
+  // show user's message
+  messagesDiv.innerHTML += `<div class="user-msg">${userText}</div>`;
+  input.value = '';
+
+  // show a temporary "typing..." indicator
+  messagesDiv.innerHTML += `<div id="typing">Typing...</div>`;
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+  try {
+    const reply = await sendMessage(userText);
+    document.getElementById('typing').remove();
+    messagesDiv.innerHTML += `<div class="bot-msg">${reply}</div>`;
+  } catch (err) {
+    document.getElementById('typing').remove();
+    messagesDiv.innerHTML += `<div class="bot-msg">Sorry, something went wrong. Please try again.</div>`;
+    console.error('Chat error:', err);
+  }
+
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
