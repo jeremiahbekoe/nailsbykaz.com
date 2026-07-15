@@ -546,10 +546,24 @@
 
 
         <!-- COME BACK TO THIS AND DESIGN IT -->
-        <div id="chatWidget">
-  <h3 id="chatMessages">Naz Nails AI: Hello! How can I help you today?</h3>
-  <input type="text" id="chatInput" placeholder="Ask about nail styles..." />
-  <button id="sendBtn">Send</button>
+<div class="chatWidget" id="chatWidget">
+  <div class="chat-header">
+    <button class="modal-close-btn" id="modal-close-btn"></button>
+    <div class="chat-avatar"><i class="ti ti-sparkles"></i></div>
+    <div>
+      <p class="chat-title">Ask Kaz</p>
+      <p class="chat-subtitle">Style consultant</p>
+    </div>
+  </div>
+
+  <div id="chatMessages"></div>
+
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ask about nail styles..." />
+    <button id="sendBtn" aria-label="Send message">
+      <i class="ti ti-send"></i>
+    </button>
+  </div>
 </div>
 
       </div>
@@ -1132,7 +1146,7 @@
                 </div>
               </a>
 
-              <a href="#"
+              <a href="#" 
                 class="border-0 list-group-item list-group-item-action d-lg-flex align-items-center gap-4 py-3"
                 aria-current="true">
                 <img src="images/service-img5.jpg" alt="twbs" width="100" height="100"
