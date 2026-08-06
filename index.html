@@ -546,14 +546,16 @@
 
 
         <!-- COME BACK TO THIS AND DESIGN IT -->
+<div class="chat-overlay" id="chatOverlay"></div>
+
 <div class="chatWidget" id="chatWidget">
   <div class="chat-header">
-    <button class="modal-close-btn" id="modal-close-btn"></button>
     <div class="chat-avatar"><i class="ti ti-sparkles"></i></div>
     <div>
       <p class="chat-title">Ask Kaz</p>
       <p class="chat-subtitle">Style consultant</p>
     </div>
+    <button class="chat-close-btn" id="closeChatBtn" aria-label="Close">&times;</button>
   </div>
 
   <div id="chatMessages"></div>
@@ -565,6 +567,11 @@
     </button>
   </div>
 </div>
+
+<button id="chatLauncher">
+    ✨
+</button>
+
 
       </div>
     </div>

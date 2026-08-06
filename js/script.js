@@ -226,3 +226,36 @@ async function sendChatMessage() {
 
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+
+
+const chatWidget = document.getElementById("chatWidget");
+// const chatOverlay = document.getElementById("chatOverlay");
+const closeChatBtn = document.getElementById("closeChatBtn");
+
+function openChat() {
+  chatWidget.style.display = 'flex';
+  // chatOverlay.style.display = 'block';
+  // Forcing a reflow so the browser registers the starting state
+  // before adding the class that triggers the transition
+  requestAnimationFrame(() => {
+    chatWidget.classList.add('show');
+    chatOverlay.classList.add('show');
+  });
+}
+
+function closeChat() {
+  console.log("Closing");
+
+  chatWidget.classList.remove("show");
+  chatOverlay.classList.remove("show");
+
+  setTimeout(() => {
+    chatWidget.style.display = "none";
+    chatOverlay.style.display = "none";
+  }, 300);
+}
+
+setTimeout(openChat, 1000);
+
+closeChatBtn.addEventListener("click", closeChat);
+chatOverlay.addEventListener("click", closeChat);
